@@ -24,11 +24,11 @@
         </header>
         <main>
             <div class="uk-container uk-container-expand uk-padding">
-            <?php echo $content; ?>
+                @yield('content')
             </div>
         </main>
         <footer class="uk-padding uk-text-center">
-            <span class="uk-text-muted">&copy; Mindk</span>
+            <span class="uk-text-muted">&copy; Author</span>
         </footer>
     </body>
 </html>
