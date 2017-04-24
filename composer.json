@@ -1,0 +1,21 @@
+{
+    "name": "shulha/blog",
+    "description": "Application",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "shulha",
+            "email": "shulhad@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "shulha/framework": "dev-feat-models"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/home/dym/projects/frame/framework"
+        }
+    ]
+}
