@@ -2,11 +2,13 @@
 
 return [
     "db" => [
-        'driver' => 'mysql',
-        'host' => 'localhost',
-        'dbname' => 'myapp',
-        'user' => 'root',
-        'passwd' => '123'
+        'driver' => 'pgsql',
+        'host'   => 'localhost',
+        'database' => 'myapp',
+        'username'   => 'postgres',
+        'password' => '321',
+        'charset'  => 'utf8',
+        'schema'   => 'public',
     ],
     "path_to_views" => realpath(dirname(__FILE__) . "/../src/View"),
 //    "routes" => include('routes.php'),

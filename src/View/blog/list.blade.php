@@ -11,7 +11,7 @@
 
          <p class="uk-text-lead"><?php echo \Myblog\Model\BlogModel::teaser($article->text); ?></p>
 
-         <p><?php echo \Myblog\Model\BlogModel::teaser($article->text); ?></p>
+         <p><?php //echo \Myblog\Model\BlogModel::teaser($article->text); ?></p>
 
          <div class="uk-grid-small uk-child-width-auto" uk-grid>
              <div>

@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function index(BlogModel $model){
 
-        return view('blog/list', ['articles' => $model->get()]);
+        return view('blog/list', ['articles' => $model->all()]);
     }
 
     /**
@@ -32,5 +32,19 @@ class BlogController extends Controller
         }
 
         return view('blog/single', compact('article'));
+    }
+
+    public function save(BlogModel $model)
+    {
+        $columns = ['title','text'];
+        $values = ['test', 'save'];
+        $article = $model->insert($columns, $values);
+    }
+
+    public function edit($id, BlogModel $model)
+    {
+        $columns = ['text', 'author'];
+        $values = ['edited', 'edit'];
+        $article = $model->update($id, $columns, $values);
     }
 }

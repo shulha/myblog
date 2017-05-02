@@ -10,7 +10,7 @@
 
          <p class="uk-text-lead"><?php echo $article->text; ?></p>
 
-         <p><?php echo $article->text; ?></p>
+         <p><?php //echo $article->text; ?></p>
 
          <div class="uk-grid-small uk-child-width-auto" uk-grid>
              <div>
