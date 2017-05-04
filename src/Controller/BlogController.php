@@ -5,10 +5,12 @@ namespace Myblog\Controller;
 use Myblog\Model\BlogModel;
 use Shulha\Framework\Controller\Controller;
 use Shulha\Framework\Router\Exception\RouteNotFoundException;
+use Shulha\Framework\Security\Exception\NotPermittedException;
+use Shulha\Framework\Security\Security;
 
 /**
  * Class IndexController
- * @package Mystore
+ * @package Myblog
  */
 class BlogController extends Controller
 {
@@ -17,34 +19,47 @@ class BlogController extends Controller
      */
     public function index(BlogModel $model){
 
-        return view('blog/list', ['articles' => $model->all()]);
+	    $articles = $model->all();
+
+        return view('blog/list', compact('articles'));
     }
 
     /**
      * Index action
      */
-    public function single($id, BlogModel $model){
+    public function single($id, BlogModel $model, Security $security){
 
         $article = $model->find($id);
+        $canEdit = $security->checkPermission('blog.edit', $article, $security->getUser());
 
         if(empty($article)){
             throw new RouteNotFoundException(sprintf('Article with ID %s can not be found', $id));
         }
 
-        return view('blog/single', compact('article'));
+        return view('blog/single', compact('article', 'canEdit'));
     }
 
-    public function save(BlogModel $model)
-    {
-        $columns = ['title','text'];
-        $values = ['test', 'save'];
-        $article = $model->insert($columns, $values);
+    /**
+     * Edit post action
+     */
+    public function edit($id, BlogModel $model, Security $security){
+
+        $article = $model->find($id);
+        if(!$security->checkPermission('blog.edit', $article, $security->getUser())){
+            throw new NotPermittedException('You can not access this page');
+        }
+
+        if(empty($article)){
+            $article = $model->create();
+        }
+
+        return view('blog/edit', compact('article'));
     }
 
-    public function edit($id, BlogModel $model)
-    {
-        $columns = ['text', 'author'];
-        $values = ['edited', 'edit'];
-        $article = $model->update($id, $columns, $values);
-    }
+//    public function save(BlogModel $model)
+//    {
+//        $columns = ['title','text'];
+//        $values = ['test', 'save'];
+//        $article = $model->insert($columns, $values);
+//    }
 }

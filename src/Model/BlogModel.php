@@ -11,7 +11,7 @@ use Shulha\Framework\Model\Model;
  */
 class BlogModel extends Model
 {
-    protected $table = 'blog';
+    public $table = 'blog';
 
     /**
      * Crop the text

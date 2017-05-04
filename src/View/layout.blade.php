@@ -1,3 +1,6 @@
+<?php
+use \Shulha\Framework\Security\Security;
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +22,16 @@
                     <a href="<?php echo route('root'); ?>" class="uk-navbar-item uk-logo">
                         My Application
                     </a>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <?php if(Security::checkAuth()):?>
+                        <li><a href="#"><i uk-icon="icon:user"></i> <?php echo Security::getUser()->login; ?></a></li>
+                        <?php else: ?>
+                        <li><a href="<?php echo route('registration'); ?>">Registration</a></li>
+                        <li><a href="<?php echo route('login'); ?>">Login</a></li>
+                        <?php endif;?>
+                    </ul>
                 </div>
             </nav>
         </header>

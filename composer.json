@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "shulha/framework": "dev-feat-models"
+        "shulha/framework": "dev-feat-ACL"
     },
     "repositories": [
         {

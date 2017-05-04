@@ -10,10 +10,11 @@ return [
         'charset'  => 'utf8',
         'schema'   => 'public',
     ],
+    "login" => '/login',
     "path_to_views" => realpath(dirname(__FILE__) . "/../src/View"),
-//    "routes" => include('routes.php'),
     "services" => include('services.php'),
     "router" => [
         'config' => include('routes.php')
     ],
+    "permissions" => include('permissions.php')
 ];
