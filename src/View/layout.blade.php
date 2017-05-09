@@ -16,6 +16,7 @@ use \Shulha\Framework\Security\Security;
                     <ul class="uk-navbar-nav">
                         <li><a href="<?php echo route('root'); ?>" uk-icon="icon:home"></a></li>
                         <li><a href="<?php echo route('blog'); ?>">Blog</a></li>
+                        <li><a href="<?php echo route('catalog'); ?>">Catalog</a></li>
                     </ul>
                 </div>
                 <div class="uk-navbar-center">

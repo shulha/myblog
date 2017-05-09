@@ -47,5 +47,18 @@ return [
         "pattern" => "/submit",
         "method" => "POST",
         "action" => "Shulha\\Framework\\Controller\\AuthController@saveReg"
-    ]
+    ],
+    "catalog" => [
+        "pattern" => "/category",
+        "method" => "GET",
+        "action" => "Myblog\\Controller\\CategoryController@index"
+    ],
+    "category" => [
+        "pattern" => "/category/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Myblog\\Controller\\CategoryController@menu"
+    ],
 ];
