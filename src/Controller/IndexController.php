@@ -1,6 +1,6 @@
 <?php
 
-namespace Myblog\Controller;
+namespace Mystore\Controller;
 
 use Shulha\Framework\Controller\Controller;
 
@@ -15,6 +15,6 @@ class IndexController extends Controller
      */
     public function index(){
 
-        return view('main');
+        return view('layout.main');
     }
 }

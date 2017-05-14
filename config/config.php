@@ -4,7 +4,7 @@ return [
     "db" => [
         'driver' => 'pgsql',
         'host'   => 'localhost',
-        'database' => 'myapp',
+        'database' => 'store',
         'username'   => 'postgres',
         'password' => '321',
         'charset'  => 'utf8',

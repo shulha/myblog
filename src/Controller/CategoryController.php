@@ -1,9 +1,10 @@
 <?php
 
-namespace Myblog\Controller;
+namespace Mystore\Controller;
 
-use Myblog\Model\Categories;
+use Mystore\Model\Categories;
 use Shulha\Framework\Controller\Controller;
+use Shulha\Framework\Response\RedirectResponse;
 
 class CategoryController extends Controller
 {
@@ -38,14 +39,14 @@ class CategoryController extends Controller
 //        print_r($tree);
 
 //           debug($categories);
-//        if ($categories) {
+        if ($categories) {
 //            $goods = Goods::find(['category_id' => $category->id]);
 //            $goods = Goods::where('category_id', '=', $category->id)->get();
 //            dd($goods);
             return view('categories', compact('categories'));
-//        }
-//        else
-//            return $this->redirect('blog');
+        }
+        else
+            return new RedirectResponse('/product/' . $id, 200);
     }
 
     public function index(Categories $categories)

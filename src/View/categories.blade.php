@@ -1,17 +1,17 @@
-@extends('layout')
+@extends('layout.main')
 
 @section('content')
 
     <?php if(!empty($categories)): ?>
-    <?php foreach($categories as $cat): ?>
+    <?php foreach($categories as $category): ?>
     <p>
-        <a href="/category/{{$cat->id}}">
-            {{ $cat->name }}
+        <a href="/category/{{$category->id}}">
+            {{ $category->name }}
         </a>
     </p>
     <?php endforeach; ?>
     <?php else: ?>
-    <p class="uk-alert uk-alert-primary">
+    <p class="alert alert-danger">
         Sorry, there are nothing to display yet...
     </p>
     <?php endif; ?>

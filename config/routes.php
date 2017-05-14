@@ -4,8 +4,30 @@ return [
     "root" => [
         "pattern" => "/",
         "method" => "GET",
-        "action" => "Myblog\\Controller\\IndexController@index"
+        "action" => "Mystore\\Controller\\IndexController@index",
+//        "middlewares" => ['admin', 'age']
     ],
+    "registration" => [
+        "pattern" => "/registration",
+        "method" => "GET",
+        "action" => "Shulha\\Framework\\Controller\\AuthController@registration"
+    ],
+    "auth" => [
+        "pattern" => "/signin",
+        "method" => "POST",
+        "action" => "Shulha\\Framework\\Controller\\AuthController@signin"
+    ],
+    "login" => [
+        "pattern" => "/login",
+        "method" => "GET",
+        "action" => "Shulha\\Framework\\Controller\\AuthController@login"
+    ],
+    "save_user" => [
+        "pattern" => "/submit",
+        "method" => "POST",
+        "action" => "Shulha\\Framework\\Controller\\AuthController@saveReg"
+    ],
+
     "blog" => [
         "pattern" => "/blog",
         "method" => "GET",
@@ -28,30 +50,11 @@ return [
         "action" => "Myblog\\Controller\\BlogController@edit",
         "roles"  => ["ADMIN"]
     ],
-    "login" => [
-        "pattern" => "/login",
-        "method" => "GET",
-        "action" => "Shulha\\Framework\\Controller\\AuthController@login"
-    ],
-    "registration" => [
-        "pattern" => "/registration",
-        "method" => "GET",
-        "action" => "Shulha\\Framework\\Controller\\AuthController@registration"
-    ],
-    "auth" => [
-        "pattern" => "/signin",
-        "method" => "POST",
-        "action" => "Shulha\\Framework\\Controller\\AuthController@signin"
-    ],
-    "save_user" => [
-        "pattern" => "/submit",
-        "method" => "POST",
-        "action" => "Shulha\\Framework\\Controller\\AuthController@saveReg"
-    ],
+
     "catalog" => [
         "pattern" => "/category",
         "method" => "GET",
-        "action" => "Myblog\\Controller\\CategoryController@index"
+        "action" => "Mystore\\Controller\\CategoryController@index"
     ],
     "category" => [
         "pattern" => "/category/{id}",
@@ -59,6 +62,22 @@ return [
         "variables" => [
             "id" => "\d+"
         ],
-        "action" => "Myblog\\Controller\\CategoryController@menu"
+        "action" => "Mystore\\Controller\\CategoryController@menu"
+    ],
+    "category_products" => [
+        "pattern" => "/product/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\ProductController@index"
+    ],
+    "product" => [
+        "pattern" => "/show/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\ProductController@show"
     ],
 ];

@@ -1,19 +1,13 @@
-@extends('layout')
+@extends('layout.main')
 
 @section('content')
 
-<div class="uk-width-1-1 uk-flex-center uk-flex uk-text-center">
-    <form method="POST" action="<?php echo route('auth'); ?>">
-        <legend class="uk-legend">Login</legend>
-        <div class="uk-margin">
-            <input class="uk-input" type="text" name="login" placeholder="Login" />
-        </div>
-        <div class="uk-margin">
-            <input class="uk-input" type="password" name="password" placeholder="Password" />
-        </div>
-        <div class="uk-margin">
-            <button type="submit" class="uk-button uk-button-primary">SignIn</button>
-        </div>
+<div class="container">
+    <form method="POST" action="<?php echo route('auth'); ?>" class="form-signin" >
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input class="form-control" type="text" name="login" placeholder="Login" />
+        <input class="form-control" type="password" name="password" placeholder="Password" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
 
