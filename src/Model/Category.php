@@ -4,7 +4,7 @@ namespace Mystore\Model;
 
 use Shulha\Framework\Model\Model;
 
-class Categories extends Model
+class Category extends Model
 {
     public $table = 'categories';
 }

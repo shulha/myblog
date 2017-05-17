@@ -17,6 +17,7 @@ use \Shulha\Framework\Security\Security;
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="{{route('catalog')}}">Catalog</a></li>
+                <li><a href="{{route('admin')}}">Admin</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">

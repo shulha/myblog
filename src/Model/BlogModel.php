@@ -1,6 +1,6 @@
 <?php
 
-namespace Myblog\Model;
+namespace Mystore\Model;
 
 use Shulha\Framework\Model\Model;
 

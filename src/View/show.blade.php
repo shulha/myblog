@@ -25,7 +25,6 @@
         <th>Название</th>
         <th>Значение</th>
         <th>Ед. измерения</th>
-        <th> </th>
         </thead>
         <tbody>
 
@@ -34,12 +33,12 @@
                 <td>{{$parameter->title}}</td>
                 <td>{{$parameter->value}}</td>
                 <td>{{$parameter->unit}}</td>
-                <td><button class="btn btn-primary buy-btn" id="{{$items->id}}">Купить</button></td>
             </tr>
         @endforeach
         </tbody>
     </table>
+    <h2 class="text-success">Цена: {{$items->price}} USD</h2>
     <hr>
-    <h2 class="text-success">Цена: {{$items->price}} руб.</h2>
+    <td><button class="btn btn-primary buy-btn" id="{{$items->id}}">Купить</button></td>
 </div>
 @stop

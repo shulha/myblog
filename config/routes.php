@@ -5,7 +5,6 @@ return [
         "pattern" => "/",
         "method" => "GET",
         "action" => "Mystore\\Controller\\IndexController@index",
-//        "middlewares" => ['admin', 'age']
     ],
     "registration" => [
         "pattern" => "/registration",
@@ -27,11 +26,17 @@ return [
         "method" => "POST",
         "action" => "Shulha\\Framework\\Controller\\AuthController@saveReg"
     ],
+    "admin" => [
+        "pattern" => "/adminzone",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\AdminController@index"
+//        "middlewares" => ['admin', 'age']
+    ],
 
     "blog" => [
         "pattern" => "/blog",
         "method" => "GET",
-        "action" => "Myblog\\Controller\\BlogController@index"
+        "action" => "Mystore\\Controller\\BlogController@index"
     ],
     "blog_article" => [
         "pattern" => "/blog/{id}",
@@ -50,11 +55,11 @@ return [
         "action" => "Myblog\\Controller\\BlogController@edit",
         "roles"  => ["ADMIN"]
     ],
-
+//-------------------------------------------------------------------------------
     "catalog" => [
         "pattern" => "/category",
         "method" => "GET",
-        "action" => "Mystore\\Controller\\CategoryController@index"
+        "action" => "Mystore\\Controller\\CategoriesController@index"
     ],
     "category" => [
         "pattern" => "/category/{id}",
@@ -62,8 +67,48 @@ return [
         "variables" => [
             "id" => "\d+"
         ],
-        "action" => "Mystore\\Controller\\CategoryController@menu"
+        "action" => "Mystore\\Controller\\CategoriesController@menu"
     ],
+    "all_categories" => [
+        "pattern" => "/adminzone/categories",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\CategoriesController@allmenu"
+    ],
+    "store_category" => [
+        "pattern" => "/adminzone/categories",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\CategoriesController@store"
+    ],
+    "create_category" => [
+        "pattern" => "/adminzone/categories/create",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\CategoriesController@create"
+    ],
+    "destroy_category" => [
+        "pattern" => "/adminzone/categories/{id}",
+        "method" => "DELETE",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\CategoriesController@destroy"
+    ],
+    "edit_category" => [
+        "pattern" => "/adminzone/categories/edit/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\CategoriesController@edit"
+    ],
+    "update_category" => [
+        "pattern" => "/adminzone/categories/edit/{id}",
+        "method" => "POST",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\CategoriesController@update"
+    ],
+//-------------------------------------------------------------------------------
     "category_products" => [
         "pattern" => "/product/{id}",
         "method" => "GET",

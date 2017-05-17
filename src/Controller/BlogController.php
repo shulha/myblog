@@ -1,8 +1,8 @@
 <?php
 
-namespace Myblog\Controller;
+namespace Mystore\Controller;
 
-use Myblog\Model\BlogModel;
+use Mystore\Model\BlogModel;
 use Shulha\Framework\Controller\Controller;
 use Shulha\Framework\Router\Exception\RouteNotFoundException;
 use Shulha\Framework\Security\Exception\NotPermittedException;
