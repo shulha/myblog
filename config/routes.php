@@ -118,11 +118,65 @@ return [
         "action" => "Mystore\\Controller\\ProductController@index"
     ],
     "product" => [
-        "pattern" => "/show/{id}",
+        "pattern" => "/product/show/{id}",
         "method" => "GET",
         "variables" => [
             "id" => "\d+"
         ],
         "action" => "Mystore\\Controller\\ProductController@show"
+    ],
+    "create_product" => [
+        "pattern" => "/adminzone/products/create",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\ProductController@create"
+    ],
+    "last_product" => [
+        "pattern" => "/adminzone/products",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\ProductController@last"
+    ],
+    "store_product" => [
+        "pattern" => "/adminzone/products",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\ProductController@store"
+    ],
+    "all_parameters" => [
+        "pattern" => "/adminzone/products/parameters",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\ParametersController@show"
+    ],
+    "save_parameters" => [
+        "pattern" => "/adminzone/products/parameters",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\ParametersController@save"
+    ],
+    "edit_product" => [
+        "pattern" => "/adminzone/products/edit/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\ProductController@edit"
+    ],
+    "update_product" => [
+        "pattern" => "/adminzone/products/edit/{id}",
+        "method" => "POST",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\ProductController@update"
+    ],
+    "del_image" => [
+        "pattern" => "/adminzone/products/del_image",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\ProductController@del_image"
+    ],
+    "destroy_product" => [
+        "pattern" => "/adminzone/products/{id}",
+        "method" => "DELETE",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\ProductController@destroy"
     ],
 ];

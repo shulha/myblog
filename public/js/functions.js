@@ -5,8 +5,8 @@ $(document).ready(function(){
         var list;
         button=$(this); // объект кнопка
         $.ajax({
-            url: '/get_parameters',
-            type: "POST",
+            url: '/adminzone/products/parameters',
+            type: "GET",
             headers: {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
@@ -39,7 +39,7 @@ $(document).on('click','.save_and_close',function(){
     title=$('.parameter_modal').val();
     unit=$('.unit_modal').val();
     $.ajax({
-        url: '/save_parameters',
+        url: '/adminzone/products/parameters',
         method: 'POST',
         data: {title:title,unit:unit},
         headers: {
@@ -69,12 +69,12 @@ $(document).on('click','.del_image',function(){
     item_id=$("#item_id").val(); //id товара
 
     $.ajax({
-        url: '/del_image',
+        url: '/adminzone/products/del_image',
         method: 'POST',
         data: {src:src,item_id:item_id},
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        },
+        // headers: {
+        //     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        // },
         success: function(res)
         {
             div.remove(); //если все прошло без ошибок то удаляем div
@@ -82,6 +82,25 @@ $(document).on('click','.del_image',function(){
         error: function(msg)
         {
             console.log(msg);// если ошибка, то можно посмотреть в консоле
+        }
+    });
+});
+
+$(document).on('click','.del_product',function() {
+    id = parseInt($(this).attr('id'));
+    confirm_var=confirm('Удалить продукт?');
+    if (!confirm_var) return false;
+    $.ajax({
+        url:'/adminzone/products/'+id,
+        method: 'DELETE',
+        success: function(msg)
+        {
+            alert('Product "'+msg+'" destroy');
+            window.location.reload();
+        },
+        error: function(msg)
+        {
+            console.log(msg);
         }
     });
 });
@@ -218,3 +237,28 @@ function insert_cost()
 {
     $('.total_cost').html(total_cost());
 }
+
+$(document).ready(function()
+{
+    $('.del_category').click(function()
+    {
+        parent=$(this).parent().parent();//получаем родителя нашего span. parent будет содержать объект tr (строку нашей таблицы)
+        id=parent.children().first().html(); //id будет содержать id нашей категории, которое берется из первой ячейки строки
+        confirm_var=confirm('Удалить категорию?');//запрашиваем подтверждение на удаление
+        if (!confirm_var) return false;
+        $.ajax({
+            url:'/adminzone/categories/'+id, //url куда мы мы передаем delete запрос
+            method: 'DELETE',
+            // data: {'_token':"{{csrf_token()}}" }, //не забываем передавать токен, или будет ошибка.
+            success: function(msg)
+            {
+                parent.remove(); // удаляем строчку tr из таблицы
+                alert('Category "'+msg+'" destroy');
+            },
+            error: function(msg)
+            {
+                console.log(msg); // в консоле  отображаем информацию об ошибки, если они есть
+            }
+        });
+    });
+});

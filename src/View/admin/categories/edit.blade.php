@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.main')
 
 @section('content')
     <form method="POST" action="/adminzone/categories/edit/{{$category->id}}"/>

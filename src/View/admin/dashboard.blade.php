@@ -1,23 +1,23 @@
-@extends('layout.admin')
+@extends('layout.main')
 
 @section('content')
     <h2>Товары</h2>
         <ul>
-            {{--<li><a href="/adminzone/articles">Все статьи</a></li>--}}
-            <li><a href="/adminzone/articles/create">Добавить товар</a></li>
+            <li><a href="{{route('last_product')}}">Последние добавленные</a></li>
+            <li><a href="{{route('create_product')}}">Добавить товар</a></li>
         </ul>
     <h2>Категории</h2>
         <ul>
-            <li><a href="/adminzone/categories">Все категории</a></li>
-            <li><a href="/adminzone/categories/create">Добавить категорию</a></li>
+            <li><a href="{{route('all_categories')}}">Все категории</a></li>
+            <li><a href="{{route('create_category')}}">Добавить категорию</a></li>
         </ul>
-    <h2>Комментарии</h2>
+    <h2>Параметры</h2>
         <ul>
-            <li><a href="/adminzone/comments">Все комментарии</a></li>
+            {{--<li><a href="{{route('all_parameters')}}">Все параметры</a></li>--}}
         </ul>
     <h2>Страницы</h2>
         <ul>
             <li><a href="#">Все страницы</a></li>
-            <li><a href="#">Добавить категорию</a></li>
+            <li><a href="#">Добавить страницу</a></li>
         </ul>
 @stop
