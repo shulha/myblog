@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             @foreach($images as $image)
-                <img class="img-thumbnail" width=100 src="{{$image}}">
+                <img class="img-thumbnail" width=150 src="{{$image}}">
             @endforeach
         </div>
     </div>
