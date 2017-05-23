@@ -19,24 +19,31 @@
             {{$items->description}}
         </div>
     </div>
-    <h3>Параметры</h3>
-    <table class="table table-striped">
-        <thead>
-        <th>Название</th>
-        <th>Значение</th>
-        <th>Ед. измерения</th>
-        </thead>
-        <tbody>
+    @if($parameters)
+        <h3>Параметры</h3>
+        <table class="table table-striped">
+            <thead>
+            <th>Название</th>
+            <th>Значение</th>
+            </thead>
+            <tbody>
 
-        @foreach($parameters as $parameter)
-            <tr>
-                <td>{{$parameter->title}}</td>
-                <td>{{$parameter->value}}</td>
-                <td>{{$parameter->unit}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+            @foreach($parameters as $parameter => $values)
+                <tr>
+                    <td>{{$parameter}}</td>
+                    <td>
+                        <select size="1" name="value">
+                                @foreach($values as $k => $v)
+                                        <option value="{{$k}}">{{$v}}</option>
+                                @endforeach
+                        </select>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @endif
+    <h3>Доступно: {{$items->storage}} шт.</h3>
     <h2 class="text-success">Цена: {{$items->price}} USD</h2>
     <hr>
     <td><button class="btn btn-primary buy-btn" id="{{$items->id}}">Купить</button></td>

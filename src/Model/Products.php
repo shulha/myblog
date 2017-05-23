@@ -10,7 +10,7 @@ class Products extends Model
 
     public function parameters($id)
     {
-        return $this->qb->query('SELECT * FROM products p 
+        return $this->qb->query('SELECT par.title, pv.value, par.unit, pv.parameters_id, pv.id FROM products p 
                                  LEFT JOIN parameters_values pv ON p.id = pv.products_id
                                  LEFT JOIN parameters par ON pv.parameters_id = par.id 
                                  WHERE p.id ='. $id)->get();

@@ -30,9 +30,16 @@ class ProductController extends Controller
 
 //        $parameters=$model->qb->query('SELECT * FROM products p JOIN parameters_values pv ON p.id = pv.products_id JOIN parameters par ON pv.parameters_id = par.id WHERE p.id ='. $id)
 
-//        dd($product);
+//        var_dump($parameters);
+        $input = [];
+        foreach ($parameters as $item) {
+            @$input[$item->title.' '.$item->unit][$item->id] .= $item->value ;
+        }
+        $input = ($parameters[0]->id) ? $input : null;
+//        dd($input);
+
         $images = explode(';', $product->preview); //ссылки на картинки передаем отдельным массивом
-        return view('product', ['items' => $product, 'parameters' => $parameters, 'images' => $images]);
+        return view('product', ['items' => $product, 'parameters' => $input, 'images' => $images]);
     }
 
     public function create(Category $categories)
@@ -49,8 +56,9 @@ class ProductController extends Controller
         $item->description = $request->description;
         $item->selected = $request->selected ? true : false;
         $item->price = $request->price;
-        $folder = "/images/";
+        $item->storage = (int)$request->amount;
 
+        $folder = "/images/";
         if ($request->hasFile('preview')) {
             $item->preview = $request->uploadFiles('preview', $folder) ? implode(';', $request->uploaded_array) : '';
         }
@@ -84,10 +92,10 @@ class ProductController extends Controller
         $parameters = $products->parameters($id);
 //var_dump($parameters);
         $parameters_all = $param->all();
-//var_dump($parameters_all);
-//dd($parameters);
-        if (!empty($parameters) && strlen($parameters[0]->preview) > 0) {
-            $images = explode(';', $parameters[0]->preview);
+//dd($parameters_all);
+//dd($item->preview);
+        if (!empty($parameters) && strlen($item->preview) > 0) {
+            $images = explode(';', $item->preview);
         } else {
             $images = [];
         }
@@ -123,7 +131,7 @@ class ProductController extends Controller
         $selected = $request->selected ? true : false;
         $folder = "/images/";
 
-//dd($request->parameter);
+//dd($request->category_id);
         if ($request->hasFile('preview')) {
             $new_preview = $request->uploadFiles('preview', $folder) ? implode(';', $request->uploaded_array) : '';
         }
@@ -141,16 +149,19 @@ class ProductController extends Controller
         // массив будет такой ['5'=>'300'], 5 - это id параметра, 300 - значение параметра
 
         $products->update($id,
-            ['title', 'description', 'category_id', 'selected', 'price', 'preview', 'updated_at'],
-            [$request->title, $request->description, $request->category_id, $selected, $request->price, $preview, date('Y-m-j H:i:s', time())]
+            ['title', 'description', 'category_id', 'storage', 'selected', 'price', 'preview', 'updated_at'],
+            [$request->title, $request->description, $request->category_id, $request->amount, $selected, $request->price, $preview, date('Y-m-j H:i:s', time())]
             );
-
+//var_dump($request->parameters);
+//dd(count($request->parameters));
         $pv->qb->table($pv->table)->where('products_id', $id)->delete();
 
-        for($i = 0; $i < count($request->parameter); ++$i) {
-            $pv->parameters_id = $request->parameter[$i];
+        for($i = 0; $i < count($request->parameters); ++$i) {
+            $pv->parameters_id = $request->parameters[$i];
             $pv->products_id = $id;
             $pv->value = $request->value[$i] ?? "N/A";
+//            var_dump($request->parameters[$i]);
+//            var_dump($request->value[$i]);
             $pv->save();
         }
 

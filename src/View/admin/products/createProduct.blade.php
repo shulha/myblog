@@ -32,6 +32,8 @@
             <textarea class="form-control" rows="4" name="description"></textarea>
             <label class="control-label" for="price">Цена</label>
             <input class="form-control" type="text" name="price"/>
+            <label class="control-label" for="amount">Количество</label>
+            <input class="form-control" type="number" min="1" value="1" name="amount"/>
         </div>
     </div>
     <h3>Параметры товара</h3>

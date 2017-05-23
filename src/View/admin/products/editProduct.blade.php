@@ -43,6 +43,8 @@
                 <textarea class="form-control" rows="4" name="description">{{$item->description}}</textarea>
                 <label class="control-label" for="price">Цена</label>
                 <input class="form-control" type="text" name="price" value="{{$item->price}}"/>
+                <label class="control-label" for="amount">Количество</label>
+                <input class="form-control" type="number" name="amount" min="1" value="{{$item->storage}}"/>
             </div>
         </div>
         <h3>Параметры товара</h3>
@@ -56,9 +58,9 @@
                         <span class="input-group-btn">
                             <button class="btn btn-default  add_parameter" type="button"><i class="glyphicon glyphicon-plus"></i></button>
                         </span>
-                        <select class="form-control" name="parameter[]">
+                        <select class="form-control" name="parameters[]">
                             @foreach($parameters_all as $parameter)
-                                @if($param->id==$parameter->id)
+                                @if($param->parameters_id==$parameter->id)
                                     <option value="{{$parameter->id}}" selected="selected">
                                         {{$parameter->title}} {{$parameter->unit}}
                                     </option>

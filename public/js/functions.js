@@ -108,6 +108,9 @@ $(document).on('click','.del_product',function() {
 $(document).on('click','.buy-btn',function(){
     item_id=parseInt($(this).attr('id')); //получаем id товара
 // alert(item_id);
+//     $.session.set('some key', item_id);
+//     alert($.session.get('some key'));
+//     alert(sessionStorage['user_id']);
     price=parseInt($(this).parent().prev().children().html()); //получаем цену товара и преобразуем значение в число parseInt
     img=$(this).parent().parent().parent().children('img').attr('src'); //получаем ссылку на изображение, что бы отразить в корзине
     title=$(this).parent().parent().children('h3').html();
