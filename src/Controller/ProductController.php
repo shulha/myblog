@@ -14,7 +14,7 @@ use Shulha\Framework\Response\RedirectResponse;
 class ProductController extends Controller
 {
 
-    public function index($id, Products $model)
+    public function index($id, Products $model)     //TODO slug
     {
 
         $products = $model->qb->table($model->table)->where('category_id', '=', $id)->get();

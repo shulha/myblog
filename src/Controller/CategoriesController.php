@@ -28,7 +28,8 @@ class CategoriesController extends Controller
     public function store(Request $request, Category $categories)
     {
         $parent_id = $request->parent_id ? $request->parent_id : null;
-        $categories->insert(['name', 'parent_id'], [$request->name, $parent_id]);
+        $categories->insert(['name', 'parent_id', 'url'],
+            [$request->name, $parent_id, url_slug($request->name)]);
 
         return $this->redirect('all_categories');
     }
