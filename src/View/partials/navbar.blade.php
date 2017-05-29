@@ -1,6 +1,3 @@
-<?php
-use \Shulha\Framework\Security\Security;
-?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -15,7 +12,7 @@ use \Shulha\Framework\Security\Security;
 
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="{{route('catalog')}}">Catalog</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -34,15 +31,25 @@ use \Shulha\Framework\Security\Security;
                 <li><a href="{{route('admin')}}">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if(Security::checkAuth())
-                    <li><a href="/user" class="glyphicon glyphicon-user"><?php echo Security::getUser()->login; ?></a></li>
+                @if(checkAuth())
+                    <li><a href="/user" class="glyphicon glyphicon-user"><?php getUser()->login; ?></a></li>
+                    <li><a href="{{route('logout')}}">Logout</a></li>
+                @else
+                    <li><a href="<?php echo route('registration'); ?>">Registration</a></li>
+                    <li><a href="{{route('login')}}">Login</a></li>
                     <li><a href="/basket" class=" navbar-link navbar-right ">
                         <span class="glyphicon glyphicon-shopping-cart basket" ></span>
                         <span class="badge pull-right count_order">0</span></a>
                     </li>
-                @else
-                    <li><a href="<?php echo route('registration'); ?>">Registration</a></li>
-                    <li><a href="{{route('login')}}">Login</a></li>
+                    <li>
+                        <div class="smalcart">
+                            <strong>Товаров в корзине:</strong>	<?//=$smal_cart['cart_count']?> шт.
+                            <br/>
+                            <strong>На сумму:</strong>	<?//=$smal_cart['cart_price']?> руб.
+                            <br/>
+                            <a href=''>Оформить заказ</a>
+                        </div>
+                    </li>
                 @endif
             </ul>
         </div>

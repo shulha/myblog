@@ -21,6 +21,11 @@ return [
         "method" => "GET",
         "action" => "Shulha\\Framework\\Controller\\AuthController@login"
     ],
+    "logout" => [
+        "pattern" => "/logout",
+        "method" => "GET",
+        "action" => "Shulha\\Framework\\Controller\\AuthController@logout"
+    ],
     "save_user" => [
         "pattern" => "/submit",
         "method" => "POST",
@@ -179,4 +184,30 @@ return [
         ],
         "action" => "Mystore\\Controller\\ProductController@destroy"
     ],
+//-------------------------------------------------------------------------------
+    "basket" => [
+        "pattern" => "/basket",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\BasketController@show"
+    ],
+    "checkout" => [
+        "pattern" => "/checkout",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\BasketController@checkout"
+    ],
+    "all_orders" => [
+        "pattern" => "/adminzone/orders",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\OrderController@orders"
+    ],
+    "show_order" => [
+        "pattern" => "/adminzone/orders/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\OrderController@show"
+    ],
+
+
 ];

@@ -15,6 +15,10 @@
         <ul>
             {{--<li><a href="{{route('all_parameters')}}">Все параметры</a></li>--}}
         </ul>
+    <h2>Заказы</h2>
+        <ul>
+            <li><a href="{{route('all_orders')}}">Все заказы</a></li>
+        </ul>
     <h2>Страницы</h2>
         <ul>
             <li><a href="#">Все страницы</a></li>

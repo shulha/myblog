@@ -139,7 +139,7 @@ $(document).on('click','.buy-btn',function(){
             order.push({'item_id': item_id, 'price':price,'amount':1,'img':img,'title':title}); //добавляем к существующему массиву новый объект
         }
     }
-    $.cookie('basket',JSON.stringify(order)); // переделываем массив с объектами в строку и сохраняем в куки
+    $.cookie('basket',JSON.stringify(order),{path: '/'}); // переделываем массив с объектами в строку и сохраняем в куки
     count_order(); //запускаем функция для отображения количества заказов, текст функции напишу ниже.
 });
 

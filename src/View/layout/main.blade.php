@@ -19,6 +19,8 @@
 
 @include('partials.navbar')
 
+@yield('contentCatalog')
+
 <div class="container">
 {{--    <div class="row">
         <ol class="breadcrumb">
