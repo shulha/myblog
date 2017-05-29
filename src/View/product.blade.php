@@ -46,6 +46,9 @@
     <h3>Доступно: {{$items->storage}} шт.</h3>
     <h2 class="text-success">Цена: {{$items->price}} USD</h2>
     <hr>
-    <td><button class="btn btn-primary buy-btn" id="{{$items->id}}">Купить</button></td>
-</div>
+    <button class="btn btn-primary buy-btn" id="{{$items->id}}">Купить</button>
+
+        <a href="/cart-product/{{$items->id}}">В корзину</a>
+
+    </div>
 @stop

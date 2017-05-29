@@ -2,6 +2,7 @@
 
 namespace Mystore\Controller;
 
+use Mystore\Model\Cart;
 use Mystore\Model\Category;
 use Mystore\Model\Parameter;
 use Mystore\Model\Parameter_value;
@@ -14,15 +15,18 @@ use Shulha\Framework\Response\RedirectResponse;
 class ProductController extends Controller
 {
 
-    public function index($id, Products $model)     //TODO slug
+    public function index($id, Products $model, Cart $cart)     //TODO slug
     {
 
         $products = $model->qb->table($model->table)->where('category_id', '=', $id)->get();
 
-        return view('categoryProduct', compact('products'));
+//var_dump($_SESSION);
+        $smal_cart = $cart->getCartData();
+//var_dump($smal_cart);
+        return view('categoryProduct', compact('products', 'smal_cart'));
     }
 
-    public function show($id, Products $model)
+    public function show($id, Products $model, Cart $cart)
     {
         $product = $model->find($id); // получаем все, что касается товара (название, цена....)
         $parameters = $model->parameters($id); //получаем все параметры
@@ -38,8 +42,10 @@ class ProductController extends Controller
         $input = ($parameters[0]->id) ? $input : null;
 //        dd($input);
 
+        $smal_cart = $cart->getCartData();
+
         $images = explode(';', $product->preview); //ссылки на картинки передаем отдельным массивом
-        return view('product', ['items' => $product, 'parameters' => $input, 'images' => $images]);
+        return view('product', ['items' => $product, 'parameters' => $input, 'images' => $images, 'smal_cart' => $smal_cart]);
     }
 
     public function create(Category $categories)
@@ -175,4 +181,45 @@ class ProductController extends Controller
 
         return $product->title;
     }
+
+    public function cart($id, Cart $cart)
+    {
+        $cart->addToCart($id);
+//        dd(unserialize($_COOKIE['cart']));
+//        $cart_content = serialize($_SESSION['cart']); // сериализует  данные корзины из сессии в строку
+////        return $cart_content;
+//        SetCookie("cart", $cart_content, time()+3600*24*365, "/"); //записывает сериализованную строку в куки, хранит 1 год
+//        $this->getCartData($cart);
+//        $redirect = str_replace('http://'.$_SERVER['HTTP_HOST'], '', $_SERVER['HTTP_REFERER']);
+        header('Location: '.$_SERVER['HTTP_REFERER']);
+
+        exit;
+    }
+
+    /*
+    public function  getCartData(Cart $cart) //Получает данные из БД (цены) и вычисляет общую стоимость содержимого, а также количество
+    {
+        $res['cart_count']=0; //количество вещей в корзине
+        $res['cart_price']=0; //общая стоимость
+        $total_price=0;
+        $total_count=0;
+//dd($this->getCokieCart());
+//dd($_SESSION['cart']);
+        if(is_array(@$_SESSION['cart'])) //если удалось получить данные из куков и они успешно десериализованы в $_SESSION['cart']
+        {
+            foreach ($_SESSION['cart'] as $id=>$count){ // пробегаем по содержимому, вычилсяя сумму и количество
+                $product = $cart->products($id);
+//                dd($sql);
+                $total_price+=$product->price*$count;
+                $total_count+=$count;
+            }
+
+            $smal_cart['cart_count']=$total_count;
+            $smal_cart['cart_price']=$total_price;
+        }
+
+        return $smal_cart ?? null;
+//        return view('partials.smal_cart', compact('cart_count', 'cart_price'));
+    }
+    */
 }

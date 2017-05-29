@@ -37,6 +37,7 @@ return [
         "action" => "Mystore\\Controller\\AdminController@index"
 //        "middlewares" => ['admin', 'age']
     ],
+//-------------------------------------------------------------------------------
 
     "blog" => [
         "pattern" => "/blog",
@@ -114,7 +115,7 @@ return [
         "action" => "Mystore\\Controller\\CategoriesController@update"
     ],
 //-------------------------------------------------------------------------------
-    "category_products" => [
+    "products_of_category" => [
         "pattern" => "/product/{id}",
         "method" => "GET",
         "variables" => [
@@ -208,6 +209,14 @@ return [
         ],
         "action" => "Mystore\\Controller\\OrderController@show"
     ],
-
+//-------------------------------------------------------------------------------
+    "add_to_cart" => [
+        "pattern" => "/cart-product/{id}",
+        "method" => "GET",
+        "variables" => [
+            "id" => "\d+"
+        ],
+        "action" => "Mystore\\Controller\\ProductController@cart"
+    ],
 
 ];

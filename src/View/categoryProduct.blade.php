@@ -13,7 +13,7 @@
                             @if($product->selected)
                                 <a href="#" class="btn btn-primary buy-btn" id="{{$product->id}}" role="button">Купить</a>
 
-                                {{--<a href="/cart-product-id={{$product->id}}">В корзину</a>--}}
+                                <a href="/cart-product/{{$product->id}}">В корзину</a>
 
                             @endif
                             <a href="/product/show/{{$product->id}}" class="btn btn-default" role="button">Подробнее</a>

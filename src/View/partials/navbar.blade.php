@@ -37,19 +37,13 @@
                 @else
                     <li><a href="<?php echo route('registration'); ?>">Registration</a></li>
                     <li><a href="{{route('login')}}">Login</a></li>
-                    <li><a href="/basket" class=" navbar-link navbar-right ">
-                        <span class="glyphicon glyphicon-shopping-cart basket" ></span>
-                        <span class="badge pull-right count_order">0</span></a>
-                    </li>
-                    <li>
-                        <div class="smalcart">
-                            <strong>Товаров в корзине:</strong>	<?//=$smal_cart['cart_count']?> шт.
-                            <br/>
-                            <strong>На сумму:</strong>	<?//=$smal_cart['cart_price']?> руб.
-                            <br/>
-                            <a href=''>Оформить заказ</a>
-                        </div>
-                    </li>
+                @endif
+                <li><a href="/basket" class=" navbar-link navbar-right ">
+                    <span class="glyphicon glyphicon-shopping-cart basket" ></span>
+                    <span class="badge pull-right count_order">0</span></a>
+                </li>
+                @if(isset($smal_cart))
+                    @include('partials.smal_cart')
                 @endif
             </ul>
         </div>
