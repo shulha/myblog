@@ -111,15 +111,15 @@ $(document).on('click','.buy-btn',function(){
 //     $.session.set('some key', item_id);
 //     alert($.session.get('some key'));
 //     alert(sessionStorage['user_id']);
-    price=parseInt($(this).parent().prev().children().html()); //получаем цену товара и преобразуем значение в число parseInt
-    img=$(this).parent().parent().parent().children('img').attr('src'); //получаем ссылку на изображение, что бы отразить в корзине
-    title=$(this).parent().parent().children('h3').html();
+//     price=parseInt($(this).parent().prev().children().html()); //получаем цену товара и преобразуем значение в число parseInt
+//     img=$(this).parent().parent().parent().children('img').attr('src'); //получаем ссылку на изображение, что бы отразить в корзине
+//     title=$(this).parent().parent().children('h3').html();
     //теперь нужно узнать есть ли в куках уже такой товар
     order=$.cookie('basket'); //получаем куки с именем basket
     !order ? order=[]: order=JSON.parse(order);
     if(order.length==0)
     {
-        order.push({'item_id': item_id, 'price':price,'amount':1,'img':img,'title':title});//добавляем объект к пустому массиву
+        order.push({'item_id': item_id, 'amount':1});//добавляем объект к пустому массиву
     }
     else
     {
@@ -136,7 +136,7 @@ $(document).on('click','.buy-btn',function(){
 
         if(!flag) //если флаг опущен, значит товара в корзине нет и его надо добавить.
         {
-            order.push({'item_id': item_id, 'price':price,'amount':1,'img':img,'title':title}); //добавляем к существующему массиву новый объект
+            order.push({'item_id': item_id, 'amount':1}); //добавляем к существующему массиву новый объект
         }
     }
     $.cookie('basket',JSON.stringify(order),{path: '/'}); // переделываем массив с объектами в строку и сохраняем в куки
@@ -159,28 +159,30 @@ function count_order()
 }
 count_order();//запускаем функцию при загрузке страницы
 
-$(document).on('change keyup', '.total', function() {
+$(document).on('change', '.total', function() {
     value=$(this).val(); //получаем введенное значение
     if(value.match(/[^0-9]/g) || value<=0)//проверяем, что введенно число, что оно не равно нулю и не отрицательное.
     {
         $(this).val('1'); //если условие выше не вополняется то значение равно 1
         value=1;
     }
-    price=$(this).parent().prev().html(); //получаем цену товара
-    $(this).parent().next().html(value*price); //пересчитываем общую цену за товар
+    // price=$(this).parent().prev().html(); //получаем цену товара
+    // $(this).parent().next().html(value*price); //пересчитываем общую цену за товар
     item_id=$(this).parent().parent().children().first().html(); //получаем id товара
     set_amount(item_id,value); //сохраняем новое количество товара в куки
+    window.location.reload();
     insert_cost();
 });
 
 function set_amount(item_id, amount)
 {
     order=JSON.parse($.cookie('basket')); //получаем куки и переделываем в массив с объектами
+
     for(var i=0;i<order.length; i++) //перебераем весь массив с объектами
     {
-        if(order[i].item_id=item_id) //ищем нжный id
+        if(order[i].item_id == item_id) //ищем нжный id
         {
-            order[i].amount=amount; // устанавливаем количество товара
+            order[i].amount = amount; // устанавливаем количество товара
         }
     }
     $.cookie('basket',JSON.stringify(order)); // сохраняем все в куки
@@ -265,3 +267,32 @@ $(document).ready(function()
         });
     });
 });
+
+/*
+function add_to_cart(product_id) {
+    // alert(product_id);
+    $.post( "/add_to_cart", {product_id: product_id}, update_cart);
+    // alert('Товар добавлен в корзину');
+}
+function update_cart() {
+    $.post( "/update_cart", {}, on_success);
+    // alert('dfsfddsf');
+    function on_success(data)
+    {
+        $('#small_cart').html(data);
+    }
+}
+function remove_from_cart(product_id) {
+    $.post( "/remove_from_cart", {product_id:product_id}, update_cart_interface);
+}
+function update_product_count(product_id, count) {
+    $.post( "/update_product_count", {product_id:product_id, count:count}, update_cart_interface);
+}
+function update_cart_interface() {
+    $.post( "/cart_interface", {}, on_success);
+    function on_success(data)
+    {
+        $('#cart_interface').html(data);
+    }
+}
+*/

@@ -27,9 +27,11 @@
     </table>
     <h2>Общая сумма заказа: {{$total}}    </h2>
     <hr>
-    <h2>Информация о доставке</h2>
-    Адресс:{{$orders[0]->address}}<br>
-    Имя: {{$orders[0]->name}}<br>
-    Телефон: {{$orders[0]->phone}}<br>
+    @if ($orders)
+        <h2>Информация о доставке</h2>
+        Адресс:{{$orders[0]->address}}<br>
+        Имя: {{$orders[0]->name}}<br>
+        Телефон: {{$orders[0]->phone}}<br>
+    @endif
 </div>
 @endsection

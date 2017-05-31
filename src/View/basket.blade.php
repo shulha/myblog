@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @if(count($orders)==0)
+        @if(empty(reset($orders)))
             <h2>Ничего не выбрано</h2>
         @else
             <h2>Ваш заказ</h2>
@@ -19,10 +19,11 @@
                     <th>Действие</th>
                 </tr>
                 </thead>
-                @foreach($orders as $order)
+                @foreach($orders as $total => $value)
+                    @foreach($value as $order)
                     <tr>
-                        <td>{{$order->item_id}}</td>
-                        <td><img height=50 src="{{$order->img}}"></td>
+                        <td>{{$order->id}}</td>
+                        <td><img height=50 src="{{$order->preview}}"></td>
                         <td>{{$order->title}}</td>
                         <td>{{$order->price}}</td>
                         <td><input class="total" type="text" value="{{$order->amount}}"/>
@@ -33,7 +34,8 @@
                     </tr>
                 @endforeach
             </table>
-            <p>Итого к оплате: <span style="font-size: 2em;" class="total_cost">0</span> руб.</p>
+            <p>Итого к оплате: <span style="font-size: 2em;" class="total_cost">0</span> руб.</p> {{$total}}
+            @endforeach
             <hr>
             <h2>Информация о доставке</h2>
             <form method="POST" action="/checkout">
