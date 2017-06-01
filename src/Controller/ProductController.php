@@ -58,6 +58,7 @@ class ProductController extends Controller
     public function store(Request $request, Products $item, Parameter_value $pv)
     {
         $item->category_id = $request->category_id;
+        $item->article = $request->article;
         $item->title = $request->title;
         $item->description = $request->description;
         $item->selected = $request->selected ? true : false;

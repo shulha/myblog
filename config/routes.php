@@ -189,7 +189,7 @@ return [
     "basket" => [
         "pattern" => "/basket",
         "method" => "GET",
-        "action" => "Mystore\\Controller\\BasketController@show"
+        "action" => "Mystore\\Controller\\BasketController@index"
     ],
     "checkout" => [
         "pattern" => "/checkout",
@@ -216,7 +216,38 @@ return [
         "variables" => [
             "id" => "\d+"
         ],
+//        "action" => "Mystore\\Controller\\CartController@addToCart"
         "action" => "Mystore\\Controller\\ProductController@cart"
+    ],
+    "add_to_cartcontroller" => [
+        "pattern" => "/add_to_cart",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\CartController@addToCart"
+    ],
+    "update_cart" => [
+        "pattern" => "/update_cart",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\CartController@updateCart"
+    ],
+    "remove_from_cart" => [
+        "pattern" => "/remove_from_cart",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\CartController@removeFromCart"
+    ],
+    "update_product_count" => [
+        "pattern" => "/update_product_count",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\CartController@updateProductCount"
+    ],
+    "cart_interface" => [
+        "pattern" => "/cart_interface",
+        "method" => "GET",
+        "action" => "Mystore\\Controller\\CartController@cartInterface"
+    ],
+    "update_cart_interface" => [
+        "pattern" => "/cart_interface",
+        "method" => "POST",
+        "action" => "Mystore\\Controller\\CartController@cartInterface"
     ],
 
 ];

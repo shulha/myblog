@@ -34,7 +34,7 @@
                     </tr>
                 @endforeach
             </table>
-            <p>Итого к оплате: <span style="font-size: 2em;" class="total_cost">0</span> руб.</p> {{$total}}
+            <p>Итого к оплате: <span style="font-size: 2em;" class="total_cost">{{$total}}</span> руб.</p>
             @endforeach
             <hr>
             <h2>Информация о доставке</h2>

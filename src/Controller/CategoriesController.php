@@ -7,6 +7,7 @@ use Shulha\Framework\Controller\Controller;
 use Shulha\Framework\Request\Request;
 use Shulha\Framework\Response\JsonResponse;
 use Shulha\Framework\Response\RedirectResponse;
+use Shulha\Framework\Session\Session;
 use Shulha\Framework\Validation\Validator;
 
 class CategoriesController extends Controller
@@ -25,8 +26,18 @@ class CategoriesController extends Controller
         return view('admin.categories.create', compact('categories'));
     }
 
-    public function store(Request $request, Category $categories)
+    public function store(Request $request, Category $categories, Session $session)
     {
+        $validator = new Validator($request, [
+            "name" => ["required"],
+        ]);
+//        dd($request->name);
+//        dd($validator->getErrorList());
+        if (!$validator->validate())
+        {
+            $session->flashErrorList($validator->getErrorList());
+            return $this->redirect('create_category');
+        }
         $parent_id = $request->parent_id ? $request->parent_id : null;
         $categories->insert(['name', 'parent_id', 'url'],
             [$request->name, $parent_id, url_slug($request->name)]);
@@ -55,18 +66,17 @@ class CategoriesController extends Controller
         return view('admin.categories.edit', compact('category', 'parent', 'categories'));
     }
 
-    public function update(Request $request, Category $categories, $id)
+    public function update(Request $request, Category $categories, Session $session, $id)
     {
         $validator = new Validator($request, [
             "name" => ["required"],
-//            "price" => ["required", "numeric", "min:0"]
         ]);
-
-        if (!$validator->validate()) {
-            return new JsonResponse([
-                "success" => false,
-                "error" => $validator->getErrorList()
-            ], 400);
+//dd($request->name);
+//dd($validator->getErrorList());
+        if (!$validator->validate())
+        {
+            $session->flashErrorList($validator->getErrorList());
+            return new RedirectResponse('/adminzone/categories/edit/' . $id);
         }
 
         $parent_id = $request->parent_id ? $request->parent_id : null;

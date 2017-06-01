@@ -17,6 +17,21 @@
 </head>
 <body>
 
+@if(getErrorList())
+    <div class="container">
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            @foreach(getErrorList() as $k => $v)
+                <strong>Warning!</strong><br>
+                @foreach($v as $message)
+                    {{$message}}<br>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+    {{resetErrorList()}}
+@endif
+
 @include('partials.navbar')
 
 @yield('contentCatalog')

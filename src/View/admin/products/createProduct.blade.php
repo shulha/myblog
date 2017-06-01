@@ -26,6 +26,8 @@
                     @endforeach
                 </select>&#160;
                 <input type="checkbox" name="selected"><span> Можно ли купить из категории ?</span><br></p>
+            <label class="control-label" for="article">Артикул товара</label>
+            <input class="form-control" type="text" name="article"/>
             <label class="control-label" for="name">Название товара</label>
             <input class="form-control" type="text" name="title"/>
             <label class="control-label" for="description">Описание товара</label>

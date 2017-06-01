@@ -15,6 +15,6 @@ class IndexController extends Controller
      */
     public function index(){
 
-        return view('layout.main');
+        return $_SESSION;
     }
 }

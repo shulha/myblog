@@ -5,14 +5,20 @@
     <hr>
 
     <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            @foreach($images as $image)
-                <img class="img-thumbnail" width=150 src="{{$image}}">
-            @endforeach
+    @if(!empty(reset($images)))
+        <div class="row">
+            <div class="col-md-12">
+                @foreach($images as $image)
+                    <img class="img-thumbnail" width=150 src="{{$image}}">
+                @endforeach
+            </div>
         </div>
-    </div>
-    <h3>{{$items->title}}</h3>
+    @endif
+    <br>
+        <div>
+            Артикул: {{$items->article}}
+        </div>
+    <br>
     <div class="panel panel-default">
         <div class="panel-heading">Описание</div>
         <div class="panel-body">
